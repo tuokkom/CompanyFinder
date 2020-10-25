@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CompanyFinder</string>
+    <string name="enter_date">Find all companies started at a date</string>
+    <string name="choose_date">Choose the date:</string>
+    <string name="choose_date_btn">Enter</string>
+    <string name="change_date_btn">Change the date</string>
+    <string name="sort_by_text">Sort by</string>
+    <string name="companies_registered_at">The companies registered at date: </string>
+    <string name="company_name">Company name: </string>
+    <string name="return_text">Return</string>
+    <string name="loading_details">Finding company details…</string>
+    <string name="getting_details_failed">Getting the details failed</string>
+    <string name="loading_companies">Finding all the companies…</string>
+    <string name="getting_companies_failed">Getting the companies failed</string>
+    <string-array name="sort_by_options">
+        <item>Sort by</item>
+        <item>Name</item>
+        <item>Business ID</item>
+    </string-array>
+</resources>

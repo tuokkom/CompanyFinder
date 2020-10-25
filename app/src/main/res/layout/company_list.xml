@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/currentlyChosenDate"
+        android:text="@string/app_name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sortByText"
+        android:layout_below="@+id/currentlyChosenDate"
+        android:visibility="invisible"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentStart="true"
+        android:text="@string/sort_by_text" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/sortBySpinner"
+        android:layout_below="@+id/currentlyChosenDate"
+        android:visibility="invisible"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="#27ae60"
+        android:textColor="@android:color/white"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/responseData"
+        android:layout_below="@+id/currentlyChosenDate"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:id="@+id/companyListView"
+        android:layout_below="@+id/sortBySpinner"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/changeDateBtn"
+        android:onClick="onChooseAnotherDate"
+        android:text="@string/change_date_btn"
+        android:background="@color/colorPrimary"/>
+
+</RelativeLayout>
