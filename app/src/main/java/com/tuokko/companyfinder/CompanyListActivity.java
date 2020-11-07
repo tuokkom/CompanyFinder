@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -41,7 +43,7 @@ public class CompanyListActivity extends AppCompatActivity {
     private int mYear;
 
     private SimpleAdapter mAdapter;
-    private ArrayList<Map<String, String>> mCompanies = new ArrayList<Map<String, String>>();
+    private ArrayList<Map<String, String>> mCompanies = new ArrayList<>();
 
     private ArrayList<JSONObject> mCompanyObjects = new ArrayList<>();
 
@@ -50,6 +52,12 @@ public class CompanyListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.company_list);
 
+        ActionBar toolbar = getSupportActionBar();
+        if (toolbar != null) {
+            toolbar.setDisplayHomeAsUpEnabled(true);
+            toolbar.setDisplayShowHomeEnabled(true);
+        }
+
         mCompanyObjects = new ArrayList<>();
 
         Intent intent = getIntent();
@@ -57,7 +65,7 @@ public class CompanyListActivity extends AppCompatActivity {
         mMonth = intent.getIntExtra("month", 0);
         mYear = intent.getIntExtra("year", 0);
 
-        final TextView dateText = (TextView) findViewById(R.id.currentlyChosenDate);
+        final TextView dateText = findViewById(R.id.currentlyChosenDate);
         dateText.setText(getResources().getString(R.string.companies_registered_at) + mDay + "-" + mMonth + "-" + mYear);
 
         setupCompanyListView();
@@ -67,7 +75,7 @@ public class CompanyListActivity extends AppCompatActivity {
     /**
      * Change the date button clicked handler
      *
-     * @param view
+     * @param view View
      */
     public void onChooseAnotherDate(View view) {
         finish();
@@ -77,7 +85,7 @@ public class CompanyListActivity extends AppCompatActivity {
      * Setup of the ListView containing the company names and business ids
      */
     private void setupCompanyListView() {
-        final ListView companies = (ListView) findViewById(R.id.companyListView);
+        final ListView companies = findViewById(R.id.companyListView);
         mAdapter = new SimpleAdapter(this,
                 mCompanies, android.R.layout.simple_list_item_2,
                 new String[] {Constants.NAME, Constants.BUSINESS_ID},
@@ -98,7 +106,7 @@ public class CompanyListActivity extends AppCompatActivity {
     private void getCompanies() {
         final String METHOD_NAME = "getCompanies";
 
-        final TextView responseText = (TextView) findViewById(R.id.responseData);
+        final TextView responseText = findViewById(R.id.responseData);
         responseText.setText(getResources().getString(R.string.loading_companies));
 
         YtjRequest requestUrl = new YtjRequest();
@@ -129,12 +137,12 @@ public class CompanyListActivity extends AppCompatActivity {
     /**
      * Handle the response to the GET request to avoindata.fi
      *
-     * @param response
+     * @param response Response content
      */
     private void handleResponse(String response) {
         final String METHOD_NAME = "handleResponse";
 
-        final TextView responseText = (TextView) findViewById(R.id.responseData);
+        final TextView responseText = findViewById(R.id.responseData);
         try {
             JSONObject jsonResponse = new JSONObject(response);
             JSONArray companyArray = jsonResponse.optJSONArray(Constants.KEY_RESULTS);
