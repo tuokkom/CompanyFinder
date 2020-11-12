@@ -47,6 +47,7 @@ public class CompanyListActivity extends AppCompatActivity {
 
     private ArrayList<JSONObject> mCompanyObjects = new ArrayList<>();
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
