@@ -13,12 +13,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Disable future dates
+        DatePicker datePicker = findViewById(R.id.datePicker);
+        datePicker.setMaxDate(System.currentTimeMillis());
     }
 
     /**
      * Handle the button click event when the date is chosen
      *
-     * @param view
+     * @param view The DatePicker view
      */
     public void onDateChosenClicked(View view) {
         Intent intent = new Intent(this, CompanyListActivity.class);
