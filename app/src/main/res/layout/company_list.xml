@@ -15,6 +15,19 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/failureText"
+        android:text="@string/getting_companies_failed"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/currentlyChosenDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="40dp"

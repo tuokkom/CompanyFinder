@@ -136,7 +136,8 @@ public class CompanyListActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Log.d(CLASS_NAME, METHOD_NAME, "Error: " + error.toString());
-                //responseText.setText(getResources().getString(R.string.getting_companies_failed));
+                final TextView failureText = findViewById(R.id.failureText);
+                failureText.setVisibility(View.VISIBLE);
             }
         });
 
@@ -151,7 +152,7 @@ public class CompanyListActivity extends AppCompatActivity {
     private void handleResponse(String response) {
         final String METHOD_NAME = "handleResponse";
 
-        //final TextView responseText = findViewById(R.id.responseData);
+        //final TextView failureText = findViewById(R.id.failureText);
         try {
             JSONObject jsonResponse = new JSONObject(response);
             JSONArray companyArray = jsonResponse.optJSONArray(Constants.KEY_RESULTS);
@@ -204,17 +205,10 @@ public class CompanyListActivity extends AppCompatActivity {
 
         mSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mSortBySpinnerContent);
         mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         Spinner sortBySpinner = findViewById(R.id.sortBySpinner);
         sortBySpinner.setAdapter(mSpinnerAdapter);
-        /*
-
-        mSpinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.sort_by_options, android.R.layout.simple_spinner_item);
-        mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-         */
         sortBySpinner.setVisibility(View.VISIBLE);
-
         sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
