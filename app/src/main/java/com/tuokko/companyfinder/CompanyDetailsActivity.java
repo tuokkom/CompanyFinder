@@ -1,8 +1,11 @@
 package com.tuokko.companyfinder;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,18 +38,23 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.company_details);
 
+        ActionBar toolbar = getSupportActionBar();
+        if (toolbar != null) {
+            toolbar.setDisplayHomeAsUpEnabled(true);
+            toolbar.setDisplayShowHomeEnabled(true);
+        }
+
         setupDetailsListView();
         getCompanyDetails();
     }
 
-    /**
-     * Handle the Return button clicked event
-     *
-     * @param v
-     */
-    public void onReturnToCompanyList(View v) {
-        Log.d(CLASS_NAME, "onReturnToCompanyList", "Return button clicked");
-        finish();
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return false;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

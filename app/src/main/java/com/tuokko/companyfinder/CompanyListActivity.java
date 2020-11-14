@@ -3,9 +3,11 @@ package com.tuokko.companyfinder;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -67,19 +69,20 @@ public class CompanyListActivity extends AppCompatActivity {
         mYear = intent.getIntExtra("year", 0);
 
         final TextView dateText = findViewById(R.id.currentlyChosenDate);
-        dateText.setText(getResources().getString(R.string.companies_registered_at) + mDay + "-" + mMonth + "-" + mYear);
+        dateText.setText(getResources().getString(R.string.companies_registered_at) + mDay + "." + mMonth + "." + mYear);
 
         setupCompanyListView();
         getCompanies();
     }
 
-    /**
-     * Change the date button clicked handler
-     *
-     * @param view View
-     */
-    public void onChooseAnotherDate(View view) {
-        finish();
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return false;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**

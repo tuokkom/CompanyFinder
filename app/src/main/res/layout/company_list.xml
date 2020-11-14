@@ -45,20 +45,8 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
         android:id="@+id/companyListView"
         android:layout_below="@+id/sortBySpinner"
         android:layout_marginTop="20dp"/>
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:id="@+id/changeDateBtn"
-        android:onClick="onChooseAnotherDate"
-        android:text="@string/change_date_btn"
-        android:background="@color/colorPrimary"/>
 
 </RelativeLayout>

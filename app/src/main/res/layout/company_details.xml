@@ -17,19 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/detailsListView"
-        android:layout_marginBottom="100dp"
         android:layout_below="@+id/companyName"
         android:layout_marginTop="20dp" />
-
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/returnToCompanyList"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:onClick="onReturnToCompanyList"
-        android:background="@color/colorGreen"
-        android:text="@string/return_text" />
 
 </RelativeLayout>
