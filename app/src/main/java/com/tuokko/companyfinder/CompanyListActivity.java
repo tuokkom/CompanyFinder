@@ -49,6 +49,10 @@ public class CompanyListActivity extends AppCompatActivity {
 
     private ArrayList<JSONObject> mCompanyObjects = new ArrayList<>();
 
+    private ArrayAdapter<String> mSpinnerAdapter;
+    private ArrayList<String> mSortBySpinnerContent = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +73,7 @@ public class CompanyListActivity extends AppCompatActivity {
         mYear = intent.getIntExtra("year", 0);
 
         final TextView dateText = findViewById(R.id.currentlyChosenDate);
-        String dateTextString = getResources().getString(R.string.companies_registered_at) + mDay + "." + mMonth + "." + mYear;
+        String dateTextString = getResources().getString(R.string.companies_registered_at) + " " + mDay + "." + mMonth + "." + mYear;
         dateText.setText(dateTextString);
 
         setupCompanyListView();
@@ -194,20 +198,30 @@ public class CompanyListActivity extends AppCompatActivity {
     private void showSortBySpinner() {
         final String METHOD_NAME = "showSortBySpinner";
         Log.d(CLASS_NAME, METHOD_NAME, "Setup of the Sort-by spinner");
+        mSortBySpinnerContent.add(Constants.SORT_BY);
+        mSortBySpinnerContent.add(Constants.NAME_CAPS);
+        mSortBySpinnerContent.add(Constants.BUSINESS_ID_CAPS);
 
+        mSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, mSortBySpinnerContent);
+        mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sortBySpinner = findViewById(R.id.sortBySpinner);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
+        sortBySpinner.setAdapter(mSpinnerAdapter);
+        /*
+
+        mSpinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.sort_by_options, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortBySpinner.setAdapter(spinnerAdapter);
+        mSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+         */
         sortBySpinner.setVisibility(View.VISIBLE);
 
         sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 final String METHOD_NAME = "onItemSelected";
-                Log.d(CLASS_NAME, METHOD_NAME, "New item selected, id: " + id);
-                sortCompanies((int) id);
+                TextView castedView = (TextView) view;
+                Log.d(CLASS_NAME, METHOD_NAME, "New item selected, id: " + castedView.getText());
+                sortCompanies(castedView.getText().toString());
             }
 
             @Override
@@ -221,12 +235,13 @@ public class CompanyListActivity extends AppCompatActivity {
     /**
      * Sort the companies based on their Names or on their Business IDs
      *
-     * @param id The id to sort companies by
+     * @param text The id to sort companies by
      */
-    private void sortCompanies(int id) {
+    private void sortCompanies(String text) {
         final String METHOD_NAME = "sortCompanies";
-        switch (id) {
-            case 1:
+        switch (text) {
+            case Constants.NAME_CAPS:
+                mSpinnerAdapter.remove("Sort by");
                 Log.d(CLASS_NAME, METHOD_NAME, "Sorting results by Name");
                 mCompanies.sort(new Comparator<Map<String, String>>() {
                     @Override
@@ -238,7 +253,8 @@ public class CompanyListActivity extends AppCompatActivity {
                 });
                 mAdapter.notifyDataSetChanged();
                 break;
-            case 2:
+            case Constants.BUSINESS_ID_CAPS:
+                mSpinnerAdapter.remove("Sort by");
                 Log.d(CLASS_NAME, METHOD_NAME, "Sorting results by Business ID");
                 mCompanies.sort(new Comparator<Map<String, String>>() {
                     @Override

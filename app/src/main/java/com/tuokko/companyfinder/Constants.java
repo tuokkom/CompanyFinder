@@ -16,4 +16,8 @@ public class Constants {
 
     public final static String DETAIL_KEY = "detailKey";
     public final static String DETAIL_VALUE = "detailValue";
+
+    public final static String SORT_BY = "Sort by";
+    public final static String NAME_CAPS = "Name";
+    public final static String BUSINESS_ID_CAPS = "Business ID";
 }
