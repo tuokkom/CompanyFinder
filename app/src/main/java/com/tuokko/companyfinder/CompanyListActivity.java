@@ -69,7 +69,8 @@ public class CompanyListActivity extends AppCompatActivity {
         mYear = intent.getIntExtra("year", 0);
 
         final TextView dateText = findViewById(R.id.currentlyChosenDate);
-        dateText.setText(getResources().getString(R.string.companies_registered_at) + mDay + "." + mMonth + "." + mYear);
+        String dateTextString = getResources().getString(R.string.companies_registered_at) + mDay + "." + mMonth + "." + mYear;
+        dateText.setText(dateTextString);
 
         setupCompanyListView();
         getCompanies();
@@ -110,8 +111,8 @@ public class CompanyListActivity extends AppCompatActivity {
     private void getCompanies() {
         final String METHOD_NAME = "getCompanies";
 
-        final TextView responseText = findViewById(R.id.responseData);
-        responseText.setText(getResources().getString(R.string.loading_companies));
+        //final TextView responseText = findViewById(R.id.responseData);
+        //responseText.setText(getResources().getString(R.string.loading_companies));
 
         YtjRequest requestUrl = new YtjRequest();
         requestUrl.setDate(mDay, mMonth, mYear);
@@ -131,7 +132,7 @@ public class CompanyListActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
                 Log.d(CLASS_NAME, METHOD_NAME, "Error: " + error.toString());
-                responseText.setText(getResources().getString(R.string.getting_companies_failed));
+                //responseText.setText(getResources().getString(R.string.getting_companies_failed));
             }
         });
 
@@ -146,7 +147,7 @@ public class CompanyListActivity extends AppCompatActivity {
     private void handleResponse(String response) {
         final String METHOD_NAME = "handleResponse";
 
-        final TextView responseText = findViewById(R.id.responseData);
+        //final TextView responseText = findViewById(R.id.responseData);
         try {
             JSONObject jsonResponse = new JSONObject(response);
             JSONArray companyArray = jsonResponse.optJSONArray(Constants.KEY_RESULTS);
@@ -156,11 +157,11 @@ public class CompanyListActivity extends AppCompatActivity {
                 addCompanyToListView(companyObject);
             }
         } catch (JSONException e) {
-            responseText.setText(getResources().getString(R.string.getting_companies_failed));
+            //responseText.setText(getResources().getString(R.string.getting_companies_failed));
             e.printStackTrace();
         }
 
-        responseText.setVisibility(View.INVISIBLE);
+        //responseText.setVisibility(View.INVISIBLE);
         showSortBySpinner();
         //responseText.setText("Response is: "+ response.substring(0,500));
     }
@@ -175,7 +176,7 @@ public class CompanyListActivity extends AppCompatActivity {
         Log.d(CLASS_NAME, METHOD_NAME, "Company object: " + companyObject.toString());
 
         try {
-            Map<String, String> companyMap = new HashMap<String, String>(2);
+            Map<String, String> companyMap = new HashMap<>(2);
             companyMap.put("name", companyObject.getString("name"));
             companyMap.put("businessId", companyObject.getString("businessId"));
 
@@ -220,7 +221,7 @@ public class CompanyListActivity extends AppCompatActivity {
     /**
      * Sort the companies based on their Names or on their Business IDs
      *
-     * @param id
+     * @param id The id to sort companies by
      */
     private void sortCompanies(int id) {
         final String METHOD_NAME = "sortCompanies";
